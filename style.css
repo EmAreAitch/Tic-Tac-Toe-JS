@@ -1,0 +1,42 @@
+.has-background-aliceBlue {
+    background-color: aliceblue;
+}
+
+.has-text-navyBlue {
+    color: navy
+}
+
+.fa-custom {
+    font-size: 50px;
+    background-color: black;
+}
+
+@media (min-width: 768px) {
+    .icon.is-large {
+        width: 6rem;
+        height: 6rem;
+    }
+    .title {
+        font-size: 3rem;
+    }
+    .icon i {
+        font-size: 4rem;
+    }
+}
+
+.x-mark {
+    color: deeppink;
+}
+
+.o-mark {
+    color: limegreen;
+}
+
+.has-background-gold {
+    background-color: #AED6F1;
+}
+
+.has-table-border-black, .has-table-border-black tr, .has-table-border-black td {
+    border: 2px solid navy;
+    
+}
