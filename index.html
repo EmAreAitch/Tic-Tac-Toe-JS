@@ -1,52 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="is-clipped-tablet">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
     <title>Tic Tac Toe</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        crossorigin="anonymous" referrerpolicy="no-referrer" onload="this.rel='stylesheet'" async>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css"
         integrity="sha512-HqxHUkJM0SYcbvxUw5P60SzdOTy/QVwA1JJrvaXJv4q7lmbDZCmZaqz01UPOaQveoxfYRv1tHozWGPMcuTBuvQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="stylesheet" href="style.css">
+    <script src="TTT_script.js"></script>
+    <script src="script.js" defer></script>
 </head>
 
 <body>
-    <section class="hero is-fullheight has-background-aliceBlue">
+    <section class="hero is-fullheight has-background-image">
         <header class="hero-head">
             <nav class="navbar is-flex is-justify-content-center ">
                 <div class="navbar-brand">
-                    <h1 class="navbar-item title has-text-navyBlue">TIC-TAC-TOE</h1>
+                    <h1 class="navbar-item title has-text-lightBlue">TIC-TAC-TOE</h1>
                 </div>
             </nav>
         </header>
-        <main class="hero-body is-flex is-align-items-start is-justify-content-center py-5">
-            <table class="table has-table-border-black has-background-gold">
-                <tbody class="has-border-black">
-                <tr>
-                    <td><span class="icon is-large x-mark"><i class="fa-solid fa-xmark fa-3x"></i></span></td>
-                    <td><span class="icon is-large x-mark"><i class="fa-solid fa-xmark fa-3x"></i></span></td>
-                    <td><span class="icon is-large x-mark"><i class="fa-solid fa-xmark fa-3x"></i></span></td>
-                </tr>
-                <tr>
-                    <td><span class="icon is-large o-mark"><i class="fa-sharp fa-solid fa-circle fa-3x"></i></span></td>
-                    <td><span class="icon is-large o-mark"><i class="fa-sharp fa-solid fa-circle fa-3x"></i></span></td>
-                    <td><span class="icon is-large o-mark"><i class="fa-sharp fa-solid fa-circle fa-3x"></i></span></td>
-                </tr>
-                <tr>
-                    <td><span class="icon is-large x-mark"><i class="fa-solid fa-xmark fa-3x"></i></span></td>
-                    <td><span class="icon is-large x-mark"><i class="fa-solid fa-xmark fa-3x"></i></span></td>
-                    <td><span class="icon is-large x-mark"><i class="fa-solid fa-xmark fa-3x"></i></span></td>
-                </tr>
-                </tbody>
-            </table>
+        <main class="hero-body p-0">
+            <div class="container main-game">
+                <div class="columns is-centered is-vcentered is-mobile is-multiline">
+                    <div class="column is-5-mobile">
+                        <div class="box px-1">
+                            <div class="block control has-icons-left">
+                                <input spellcheck="false" class="input playerName is-small is-rounded" type="text"
+                                    name="player1" id="player1" value="Player 1">
+                                <span class="icon is-left x-mark"><i class="fa-solid fa-xmark fa-2x"></i></span>
+                            </div>
+                            <div class="notifcation has-text-centered">
+                                <p class="title is-size-6-mobile is-size-4 has-text-lightBlue">Score - <span
+                                        class="score">0</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-5-mobile">
+                        <div class="box px-1">
+                            <div class="block control has-icons-left">
+                                <input spellcheck="false" class="input playerName is-small is-rounded" type="text"
+                                    name="player2" id="player2" value="Player 2">
+                                <span class="icon is-medium is-left o-mark"><i
+                                        class="fa-solid fa-circle fa-2x"></i></span>
+                            </div>
+                            <div class="notifcation has-text-centered">
+                                <p class="title is-size-6-mobile is-size-4 has-text-lightBlue">Score - <span
+                                        class="score">0</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-10-mobile is-flex is-flex-direction-column is-align-items-center">
+                        <div
+                            class="notification button is-fullwidth is-danger has-text-centered py-1 px-1 is-size-7-mobile is-size-6">
+                            READY
+                        </div>
+                        <table class="table has-table-border-black has-background-lightBlue">
+                            <tbody class="has-border-black">
+                                <tr>
+                                    <td><span class="icon is-large"><i class="fa-solid fa-3x"></i></span></td>
+                                    <td><span class="icon is-large"><i class="fa-solid fa-3x"></i></span></td>
+                                    <td><span class="icon is-large"><i class="fa-solid fa-3x"></i></span></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="icon is-large"><i class="fa-solid fa-3x"></i></span></td>
+                                    <td><span class="icon is-large"><i class="fa-solid fa-3x"></i></span></td>
+                                    <td><span class="icon is-large"><i class="fa-solid fa-3x"></i></span></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="icon is-large"><i class="fa-solid fa-3x"></i></span></td>
+                                    <td><span class="icon is-large"><i class="fa-solid fa-3x"></i></span></td>
+                                    <td><span class="icon is-large"><i class="fa-solid fa-3x"></i></span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
         </main>
-        <footer class="hero-foot">
-            <div class="container has-text-navyBlue has-text-centered pb-5">
-                <p class="subtitle">By <a href="https://github.com/EmAreAitch" target="_blank" rel="noreferrer" rel="noopener">EmAreAitch</a></p>
+        <footer class="hero-foot my-5">
+            <div class="container has-text-centered">
+                <p class="subtitle has-text-lightBlue">By <a href="https://github.com/EmAreAitch" target="_blank"
+                        rel="noreferrer" rel="noopener">EmAreAitch</a></p>
             </div>
         </footer>
     </section>

@@ -1,42 +1,106 @@
-.has-background-aliceBlue {
-    background-color: aliceblue;
+@import url('https://fonts.googleapis.com/css2?family=Autour+One&display=swap');
+
+*, *::before, *::after {
+    box-sizing: border-box;
 }
 
-.has-text-navyBlue {
-    color: navy
+*:not(i) {
+    font-family: "Autour One", serif;
 }
 
-.fa-custom {
-    font-size: 50px;
-    background-color: black;
+.has-background-image {
+    background-image: url("./assets/background.png");
+    background-size: cover;
+    background-position: center;
 }
+
+.has-text-lightBlue {
+    color: #AED6F1;
+}
+
+.icon {
+    color: transparent;
+}
+
+.fa-xmark {
+    color: #fff3e1 !important;
+}
+
+.fa-circle {
+    color: darkblue !important;
+}
+
+.has-background-lightBlue {
+    background-color: rgba(255, 255, 255, 0.200);
+}
+
+.has-table-border-black, .has-table-border-black td {
+    border: 2px solid navy;
+    border-collapse: collapse;
+}
+
+td:hover {
+    background-color: rgba(0, 0, 0, 0.300);
+}
+
+.box, .input, .input:disabled {
+    background-color: rgba(255, 255, 255, 0.200);
+}
+.input:disabled {
+    color: aliceblue
+}
+.has-border-golden .input:disabled {
+    color: gold;
+}
+
+.box {
+    border: 2px solid rgba(255, 255, 255, 0);
+}
+
+.has-border-golden {
+    border: 2px solid gold;
+    box-shadow: 0 0 20px gold;
+}
+
+td {
+    width: 4.2rem;
+    height: 4.2rem;
+}
+
+a:hover {
+    color: white
+}
+.notification {
+    text-wrap: wrap;
+    height: auto;
+  }
 
 @media (min-width: 768px) {
     .icon.is-large {
         width: 6rem;
         height: 6rem;
     }
+
     .title {
         font-size: 3rem;
     }
-    .icon i {
+
+    .fa-3x {
         font-size: 4rem;
     }
-}
 
-.x-mark {
-    color: deeppink;
-}
-
-.o-mark {
-    color: limegreen;
-}
-
-.has-background-gold {
-    background-color: #AED6F1;
-}
-
-.has-table-border-black, .has-table-border-black tr, .has-table-border-black td {
-    border: 2px solid navy;
+    td {
+        width: 7.7rem;
+        height: 7.7rem;
+    }
     
 }
+
+@media (min-width: 1024px) {
+.column:nth-child(2) {
+    order: 1;
+}
+}
+
+ 
+  
