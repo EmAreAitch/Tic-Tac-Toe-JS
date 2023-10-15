@@ -48,7 +48,6 @@ function readyPlayer(e) {
 function beginGame() {
     Players.forEach((player) => player.disabled = true)
     notification.textContent = "GAME BEGINS!!!"
-    setTimeout(() => notification.classList.add("is-invisible"), 2000)
     Player1 = {
         name: Players[0].value,
         markerClass: x_mark_class,
@@ -94,7 +93,6 @@ function checkDraw() {
         notification.classList.toggle("is-primary")
         notification.classList.toggle("is-info")
         notification.textContent = `GAME IS DRAW!!! Click to restart`
-        notification.classList.remove("is-invisible")
         notification.addEventListener('click', restartGame)
     }
 }
@@ -108,7 +106,6 @@ function checkWin() {
         scores[index].textContent = +(scores[index].textContent) + 1
         boxes.forEach(box => box.classList.toggle("has-border-golden"))
         notification.textContent = `${winner.getName()} WON!!! Click to restart`
-        notification.classList.remove("is-invisible")
         celebrate_class = winner.getAnimateClass()
         winner.winningPath.forEach(index => {
             cellIcons[index].classList.add(celebrate_class)
@@ -129,7 +126,9 @@ function restartGame() {
     notification.classList.remove("is-primary")
     notification.classList.add("is-danger")
     notification.textContent = "READY"
+    notification.removeEventListener('click', restartGame)
     notification.addEventListener('click', readyPlayer)
+
     cellIcons.forEach(icon => icon.className = defaultIconClassList)
     board.addEventListener('click', notReadyAlert)
     boxes.forEach(box => box.classList.remove("has-border-golden"))

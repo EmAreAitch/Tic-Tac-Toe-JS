@@ -4,6 +4,13 @@
     box-sizing: border-box;
 }
 
+html, body {
+    height: 100%;
+}
+
+.hero {
+    height: 100% !important;
+}
 *:not(i) {
     font-family: "Autour One", serif;
 }
@@ -73,7 +80,7 @@ a:hover {
 .notification {
     text-wrap: wrap;
     height: auto;
-  }
+}
 
 @media (min-width: 768px) {
     .icon.is-large {
@@ -88,7 +95,7 @@ a:hover {
     .fa-3x {
         font-size: 4rem;
     }
-
+    
     td {
         width: 7.7rem;
         height: 7.7rem;
@@ -97,10 +104,9 @@ a:hover {
 }
 
 @media (min-width: 1024px) {
-.column:nth-child(2) {
-    order: 1;
-}
+    .column:nth-child(2) {
+        order: 1;
+    }
 }
 
  
-  
