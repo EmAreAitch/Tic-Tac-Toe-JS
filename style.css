@@ -1,23 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Autour+One&display=swap');
 
 *, *::before, *::after {
-    box-sizing: border-box;
+    box-sizing: border-box !important;
 }
-
 html, body {
-    height: 100%;
-}
-
-.hero {
     height: 100% !important;
 }
+.hero {
+    min-height: 100%;
+}
+
 *:not(i) {
     font-family: "Autour One", serif;
 }
 
-.has-background-image {
+.has-background-image { 
     background-image: url("./assets/background.png");
     background-size: cover;
+    background-repeat: no-repeat;
     background-position: center;
 }
 
