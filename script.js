@@ -48,7 +48,8 @@ let winner = undefined
 let notReadyNotice = false
 
 function readyPlayer(e) {
-    element = e.currentTarget
+    Players.forEach((e) => e.value = e.value.trim())
+    element = e.currentTarget    
     validateName = Players.every(player => name_pattern.test(player.value))
     if (!notReadyNotice) {
         if (validateName) {
