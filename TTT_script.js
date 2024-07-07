@@ -143,30 +143,17 @@ function GameBoard(Player1, Player2) {
             if (score === -10) return score + depth;
             if (isDraw()) return 0;
 
-            if (isMaximizing) {
-                let best = -Infinity;
+            let [best, playerIndex, math] = isMaximizing ? [-Infinity, currentPlayer, 'max'] : [Infinity, (currentPlayer + 1) % 2, 'min']
 
-                for (let i = 0; i < board_pos.length; i++) {
-                    if (board_pos[i] === undefined) {
-                        board_pos[i] = Players[currentPlayer];
-                        best = Math.max(best, minimax(depth + 1, false));
-                        board_pos[i] = undefined;
-                    }
+            for (let i = 0; i < board_pos.length; i++) {
+                if (board_pos[i] === undefined) {
+                    board_pos[i] = Players[playerIndex];
+                    best = Math[math](best, minimax(depth + 1, !isMaximizing));
+                    board_pos[i] = undefined;
                 }
-                return best;
-            } else {
-                let best = Infinity;
-                let opponent = (currentPlayer + 1) % 2;
-
-                for (let i = 0; i < board_pos.length; i++) {
-                    if (board_pos[i] === undefined) {
-                        board_pos[i] = Players[opponent];
-                        best = Math.min(best, minimax(depth + 1, true));
-                        board_pos[i] = undefined;
-                    }
-                }
-                return best;
             }
+
+            return best;
         }
 
         function evaluate() {
