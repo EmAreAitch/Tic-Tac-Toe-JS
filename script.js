@@ -13,13 +13,36 @@ const notification = main_game.querySelector(".notification")
 const boxes = Array.from(main_game.querySelectorAll(".box"))
 const scores = main_game.querySelectorAll(".score")
 const name_pattern = RegExp(/^[0-9A-Za-z]+( [0-9A-Za-z]+)*$/)
+let fakeName
 
-if(window.innerWidth >= 768) {
+if (window.innerWidth >= 768) {
     Players.forEach((player) => {
         player.classList.remove("is-small")
         player.classList.add("is-large")
     })
 }
+
+window.addEventListener('resize', () => {
+    if (window.innerWidth >= 768) {
+        Players.forEach((player) => {
+            player.classList.remove("is-small")
+            player.classList.add("is-large")
+        })
+    } else {
+        Players.forEach((player) => {
+            player.classList.remove("is-large")
+            player.classList.add("is-small")
+        })
+    }
+})
+
+async function setFakeName() {
+    fakeName = await fetch('https://randomuser.me/api/?nat=in&inc=name')
+        .then(data => data.json())
+        .then(data => data.results[0].name.first)
+}
+
+setFakeName()
 
 let winner = undefined
 let notReadyNotice = false
@@ -48,6 +71,7 @@ function readyPlayer(e) {
 function beginGame() {
     Players.forEach((player) => player.disabled = true)
     notification.textContent = "GAME BEGINS!!!"
+    Players[1].value = fakeName
     Player1 = {
         name: Players[0].value,
         markerClass: x_mark_class,
@@ -60,13 +84,12 @@ function beginGame() {
     }
     Game = GameBoard(Player1, Player2)
     boxes[0].classList.toggle("has-border-golden")
-    board.addEventListener('click', mark)
+    board.addEventListener('click', playerMark)
+
 }
 
 
-function mark(e) {
-    let cell = e.target.closest("td")
-    let board_index = cells.indexOf(cell)
+function mark(board_index) {
     let icon = cellIcons[board_index]
     let player = Game.playerAtIndex(board_index)
     if (player == undefined) {
@@ -76,6 +99,11 @@ function mark(e) {
         checkWin()
         checkDraw()
         boxes.forEach(box => box.classList.toggle("has-border-golden"))
+        if (Game.getCurrentPlayer().getMarker() == "O") {
+            setTimeout(() => {
+                mark(Game.findBestMove())
+            }, 200)
+        }
     } else {
         let class_to_add = player.getAnimateClass()
         icon.classList.add(class_to_add)
@@ -86,9 +114,17 @@ function mark(e) {
 
 }
 
+function playerMark(e) {
+    if (Game.getCurrentPlayer().getMarker() == "X") {
+        let cell = e.target.closest("td")
+        let board_index = cells.indexOf(cell)
+        mark(board_index)
+    }
+}
+
 function checkDraw() {
     if (Game.isDraw()) {
-        board.removeEventListener('click', mark)
+        board.removeEventListener('click', playerMark)
         boxes.forEach(box => box.classList.remove("has-border-golden"))
         notification.classList.toggle("is-primary")
         notification.classList.toggle("is-info")
@@ -101,7 +137,7 @@ function checkDraw() {
 function checkWin() {
     winner = Game.getWinner()
     if (winner) {
-        board.removeEventListener('click', mark)
+        board.removeEventListener('click', playerMark)
         index = boxes.findIndex(box => box.classList.contains("has-border-golden"))
         scores[index].textContent = +(scores[index].textContent) + 1
         boxes.forEach(box => box.classList.toggle("has-border-golden"))
@@ -116,11 +152,12 @@ function checkWin() {
 
 function restartGame() {
     if (winner) {
-    celebrate_class = winner.getAnimateClass()
-    winner.winningPath.forEach(index => {
-        cellIcons[index].classList.remove(celebrate_class)
-    })
-}
+        celebrate_class = winner.getAnimateClass()
+        winner.winningPath.forEach(index => {
+            cellIcons[index].classList.remove(celebrate_class)
+        })
+    }
+    setFakeName()
     Players.forEach((player) => player.disabled = false)
     notification.classList.remove("is-info")
     notification.classList.remove("is-primary")
@@ -149,5 +186,6 @@ function notReadyAlert() {
 notification.addEventListener('click', readyPlayer)
 
 board.addEventListener('click', notReadyAlert)
+
 
 
