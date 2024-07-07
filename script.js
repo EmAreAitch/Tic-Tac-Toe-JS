@@ -138,6 +138,7 @@ function checkDraw() {
 function checkWin() {
     winner = Game.getWinner()
     if (winner) {
+        setFakeName()
         board.removeEventListener('click', playerMark)
         index = boxes.findIndex(box => box.classList.contains("has-border-golden"))
         scores[index].textContent = +(scores[index].textContent) + 1
